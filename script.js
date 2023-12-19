@@ -2,10 +2,15 @@ import { filtersText } from "./data.js";
 import { menu } from "./data.js";
 const filtersList = document.querySelector(".filters");
 const foodItemsContainer = document.querySelector(".food-items");
-
+/**
+ * Clears out the menu item container and adds menu items to the ul menu items container.
+ * @param {[]} arrayItem 
+ */
 const displayMenuItems = (arrayItem) => {
+  //clear out the ul
   foodItemsContainer.innerHTML = "";
   const fragment = new DocumentFragment();
+  //loop through array and add li items to the fragment
   arrayItem.forEach((foodItem) => {
     const menuItem = document.createElement("li");
     menuItem.innerHTML = `
@@ -19,11 +24,16 @@ const displayMenuItems = (arrayItem) => {
     <p class="desc">${foodItem.desc}</p>
     </div>
     </div>`;
-
     fragment.appendChild(menuItem);
   });
+  //append fragment to the ul
   foodItemsContainer.appendChild(fragment);
 };
+/**
+ * When user clicks on the button they can filter through the menu items by their categories.
+ * @param {String} type 
+ * @returns {Array}
+ */
 const filterMeals = (type) => {
   let filterResults = menu.filter((item) => {
     return item.category === type;
@@ -34,20 +44,24 @@ const filterMeals = (type) => {
   displayMenuItems(filterResults);
   return filterResults;
 };
-
-window.addEventListener("DOMContentLoaded", () => {
-  const fragment = new DocumentFragment();
-  filtersText.forEach((filterWord) => {
-    const filterLi = document.createElement("li");
-    filterLi.textContent = filterWord;
-    filterLi.classList.add("filterButton");
-    filterLi.addEventListener("click", () => {
-      filterMeals(filterWord);
-    });
-    fragment.appendChild(filterLi);
+/**
+ * Display filter buttons and add click event listener
+ */
+const addFilterbuttons =()=>{
+const fragment = new DocumentFragment();
+filtersText.forEach((filterWord) => {
+  const filterLi = document.createElement("li");
+  filterLi.textContent = filterWord;
+  filterLi.classList.add("filterButton");
+  filterLi.addEventListener("click", () => {
+    filterMeals(filterWord);
   });
-  filtersList.appendChild(fragment);
+  fragment.appendChild(filterLi);
 });
+filtersList.appendChild(fragment);
+}
+// When page loads:
+window.addEventListener("DOMContentLoaded", addFilterbuttons);
 window.addEventListener("DOMContentLoaded", () => {
   return displayMenuItems(menu);
 });
