@@ -1,0 +1,93 @@
+:root {
+  --orange: rgb(248, 186, 71);
+  --background: rgb(255, 255, 246);
+  --mainTextGrey: rgb(54, 54, 54);
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  height: 100vh;
+  background-color: var(--background);
+  font-family: sans-serif;
+}
+li {
+  list-style: none;
+}
+main {
+  width: 90vw;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5rem;
+  color: var(--mainTextGrey);
+}
+.underline {
+  width: 8rem;
+  height: 0.2rem;
+  background-color: var(--orange);
+}
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.filterButton {
+  list-style: none;
+  border: 1px solid var(--orange);
+  color: var(--orange);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+.filterButton:hover{
+  background-color: var(--orange);
+  color: #fff;
+}
+/* food items */
+.food-items {
+  margin-top: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 1rem;
+
+}
+.images {
+  max-width: 10rem;
+  max-height: 10rem;
+}
+.image {
+  object-fit: cover;
+  width: 100%;
+  max-height: 100%;
+  border: 2px solid var(--orange);
+  border-radius: 0.5rem
+}
+.menuItem {
+  display: flex;
+  gap: 1rem;
+  width: 30rem;
+}
+.details {
+  display: grid;
+  grid-template-areas:
+    "title price"
+    "desc desc";
+}
+.title {
+  grid-area: title;
+  font-weight: 600;
+}
+.price {
+  grid-area: price;
+  justify-self: flex-end;
+  color: var(--orange)
+}
+.desc {
+  grid-area: desc;
+  border-top: 1px solid var(--mainTextGrey);
+  padding-top: 1rem;
+}
