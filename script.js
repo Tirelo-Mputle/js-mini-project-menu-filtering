@@ -2,13 +2,14 @@ import { filtersText } from "./data.js";
 import { menu } from "./data.js";
 const filtersList = document.querySelector(".filters");
 const foodItemsContainer = document.querySelector(".food-items");
+const clearOutUl = () => {
+  foodItemsContainer.innerHTML = "";
+};
 /**
- * Clears out the menu item container and adds menu items to the ul menu items container.
- * @param {[]} arrayItem 
+ * adds menu items to the ul menu items container.
+ * @param {[]} arrayItem
  */
 const displayMenuItems = (arrayItem) => {
-  //clear out the ul
-  foodItemsContainer.innerHTML = "";
   const fragment = new DocumentFragment();
   //loop through array and add li items to the fragment
   arrayItem.forEach((foodItem) => {
@@ -31,7 +32,7 @@ const displayMenuItems = (arrayItem) => {
 };
 /**
  * When user clicks on the button they can filter through the menu items by their categories.
- * @param {String} type 
+ * @param {String} type
  * @returns {Array}
  */
 const filterMeals = (type) => {
@@ -41,25 +42,27 @@ const filterMeals = (type) => {
   if (type === "All") {
     filterResults = menu;
   }
+  //clear out the ul
+  clearOutUl();
   displayMenuItems(filterResults);
   return filterResults;
 };
 /**
  * Display filter buttons and add click event listener
  */
-const addFilterbuttons =()=>{
-const fragment = new DocumentFragment();
-filtersText.forEach((filterWord) => {
-  const filterLi = document.createElement("li");
-  filterLi.textContent = filterWord;
-  filterLi.classList.add("filterButton");
-  filterLi.addEventListener("click", () => {
-    filterMeals(filterWord);
+const addFilterbuttons = () => {
+  const fragment = new DocumentFragment();
+  filtersText.forEach((filterWord) => {
+    const filterLi = document.createElement("li");
+    filterLi.textContent = filterWord;
+    filterLi.classList.add("filterButton");
+    filterLi.addEventListener("click", () => {
+      filterMeals(filterWord);
+    });
+    fragment.appendChild(filterLi);
   });
-  fragment.appendChild(filterLi);
-});
-filtersList.appendChild(fragment);
-}
+  filtersList.appendChild(fragment);
+};
 // When page loads:
 window.addEventListener("DOMContentLoaded", addFilterbuttons);
 window.addEventListener("DOMContentLoaded", () => {
