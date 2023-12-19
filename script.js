@@ -35,11 +35,11 @@ const displayMenuItems = (arrayItem) => {
  * @param {String} type
  * @returns {Array}
  */
-const filterMeals = (type) => {
+const filterMeals = (target) => {
   let filterResults = menu.filter((item) => {
-    return item.category === type;
+    return item.category === target.dataset.category;
   });
-  if (type === "All") {
+  if (target.dataset.category === "All") {
     filterResults = menu;
   }
   //clear out the ul
@@ -54,10 +54,11 @@ const addFilterbuttons = () => {
   const fragment = new DocumentFragment();
   filtersText.forEach((filterWord) => {
     const filterLi = document.createElement("li");
+    filterLi.dataset.category = filterWord;
     filterLi.textContent = filterWord;
     filterLi.classList.add("filterButton");
-    filterLi.addEventListener("click", () => {
-      filterMeals(filterWord);
+    filterLi.addEventListener("click", (e) => {
+      filterMeals(e.target);
     });
     fragment.appendChild(filterLi);
   });
