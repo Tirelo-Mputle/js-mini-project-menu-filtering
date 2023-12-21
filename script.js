@@ -6,6 +6,16 @@ const clearOutUl = () => {
   foodItemsContainer.innerHTML = "";
 };
 /**
+ * Gets the unique category names from the menu items so we can create the
+ * category buttons
+ * @returns array of unique categories strings
+ */
+const getCategories = () => {
+  const categoryText = new Set(menu.map((item) => item.category));
+  const uniqueCategoryText = [...categoryText,"All"]     
+  return uniqueCategoryText;
+};
+/**
  * adds menu items to the ul menu items container.
  * @param {[]} arrayItem
  */
@@ -52,7 +62,8 @@ const filterMeals = (target) => {
  */
 const addFilterbuttons = () => {
   const fragment = new DocumentFragment();
-  filtersText.forEach((filterWord) => {
+  const categories = getCategories();
+  categories.forEach((filterWord) => {
     const filterLi = document.createElement("li");
     filterLi.dataset.category = filterWord;
     filterLi.textContent = filterWord;
